@@ -20,6 +20,7 @@ module.exports = {
   ],
   "ignorePatterns": [
     "src/*.css",
+    "src/*.svg",
   ],
   "rules": {
     "react-hooks/rules-of-hooks": "error",

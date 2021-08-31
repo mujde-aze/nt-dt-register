@@ -1,4 +1,4 @@
-import {Col, Form, Row} from "react-bootstrap";
+import {Button, Col, Form, Row} from "react-bootstrap";
 
 function RegistrationForm() {
   return (
@@ -31,7 +31,7 @@ function RegistrationForm() {
             </Form.Group>
           </Col>
         </Row>
-        <Row>
+        <Row className="mb-3">
           <Col xs={4}>
             <Form.Group as={Col} controlId="formGridFlatNumber">
               <Form.Label>Flat Number</Form.Label>
@@ -45,17 +45,24 @@ function RegistrationForm() {
             </Form.Group>
           </Col>
         </Row>
-        <Row>
+        <Row className="mb-3">
           <Form.Group as={Col} controlId="foArmGridStreetName">
             <Form.Label>Street Name</Form.Label>
             <Form.Control type="text" placeholder="Enter street name" />
           </Form.Group>
         </Row>
-        <Row>
+        <Row className="mb-3">
           <Form.Group className="mb-3" id="formGridAgeConfirmation">
             <Form.Check type="checkbox" id="age-confirmation"
               label="I am older than 18" />
           </Form.Group>
+        </Row>
+        <Row className="mb-3">
+          <Col xs={3}>
+            <Button variant="primary" type="submit">
+            Submit
+            </Button>
+          </Col>
         </Row>
       </Form>
     </div>

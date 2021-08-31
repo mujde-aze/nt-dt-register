@@ -1,1 +1,6 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.css";
+
+.row {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

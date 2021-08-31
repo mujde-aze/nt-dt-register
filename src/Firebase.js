@@ -1,5 +1,4 @@
 import {initializeApp} from "firebase/app";
-import {getAnalytics} from "firebase/analytics";
 const {initializeAppCheck, ReCaptchaV3Provider} = require("firebase/app-check");
 
 const firebaseConfig = {
@@ -12,16 +11,14 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
-const app = initializeApp(firebaseConfig);
-// eslint-disable-next-line no-unused-vars
-const analytics = getAnalytics(app);
+const firebaseApp = initializeApp(firebaseConfig);
 
 if (!process.env.REACT_APP_DEV_MODE) {
   // eslint-disable-next-line no-unused-vars
-  const appCheck = initializeAppCheck(app, {
+  const appCheck = initializeAppCheck(firebaseApp, {
     provider: new ReCaptchaV3Provider(process.env.RE),
     isTokenAutoRefreshEnabled: true,
   });
 }
 
-export default app;
+export default firebaseApp;

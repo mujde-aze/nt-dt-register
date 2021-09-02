@@ -1,7 +1,7 @@
 import {Button, Col, Form, Row} from "react-bootstrap";
-import {useEffect, useState} from "react";
-import {initMap} from "../Services/GoogleAutocomplete";
+import {useEffect, useRef, useState} from "react";
 import {Loader} from "@googlemaps/js-api-loader";
+import {initMap} from "../Services/GoogleAutocomplete";
 
 const loader = new Loader({
   apiKey: process.env.REACT_APP_API_KEY,
@@ -10,6 +10,7 @@ const loader = new Loader({
 });
 
 function RegistrationForm() {
+  const streetElement = useRef();
   const [formState, setFormState] = useState({
     givenName: "",
     surname: "",
@@ -25,8 +26,13 @@ function RegistrationForm() {
 
   useEffect(() => {
     loader.load()
-        .then(() => {
+        .then((/* google*/) => {
           initMap();
+          /* new google.maps.places.Autocomplete(streetElement.current, {
+            componentRestrictions: {country: ["aze"]},
+            fields: ["address_components", "geometry"],
+            types: ["address"],
+          });*/
         }).catch((e) => {
           console.error(`Failed to load autocomplete: ${e}`);
         });
@@ -48,30 +54,31 @@ function RegistrationForm() {
     console.log(formState.age);
     console.log(formState.city);
     console.log(formState.street);
+    console.log(formState.givenName);
     event.preventDefault();
   }
 
   return (
     <div>
-      <Form onSubmit={((event) => handleSubmit(event))}>
+      <Form onSubmit={handleSubmit}>
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridGivenName">
             <Form.Label>Given Name</Form.Label>
             <Form.Control type="text" name="givenName" placeholder="Enter given name"
-              value={formState.givenName} onChange={((event) => handleChange(event))}/>
+              value={formState.givenName} onChange={handleChange}/>
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridSurname">
             <Form.Label>Surname</Form.Label>
             <Form.Control type="text" name="surname" placeholder="Enter surname"
-              value={formState.surname} onChange={((event) => handleChange(event))}/>
+              value={formState.surname} onChange={handleChange}/>
           </Form.Group>
         </Row>
         <Row className="mb-3">
           <Col xs={4}>
             <Form.Group as={Col} controlId="formGridAge">
               <Form.Label>Age</Form.Label>
-              <Form.Select name="age" value={formState.age} onChange={((event) => handleChange(event))}>
+              <Form.Select name="age" value={formState.age} onChange={handleChange}>
                 <option>Select your age group</option>
                 <option>18-22</option>
                 <option>23-25</option>
@@ -86,8 +93,8 @@ function RegistrationForm() {
         <Row className="mb-3">
           <Form.Group as={Col} controlId="location">
             <Form.Label>Street Name</Form.Label>
-            <Form.Control type="text" name="street" placeholder="Enter street name"
-              value={formState.street} onChange={((event) => handleChange(event))}/>
+            <Form.Control ref={streetElement} type="text" name="street" placeholder="Enter street name"
+              value={formState.street} onChange={handleChange}/>
           </Form.Group>
         </Row>
         <Row className="mb-3">
@@ -95,14 +102,14 @@ function RegistrationForm() {
             <Form.Group as={Col} controlId="formGridFlatNumber">
               <Form.Label>Flat Number</Form.Label>
               <Form.Control type="text" name="flatNumber" placeholder="Enter flat number"
-                value={formState.flatNumber} onChange={((event) => handleChange(event))}/>
+                value={formState.flatNumber} onChange={handleChange}/>
             </Form.Group>
           </Col>
           <Col xs={4}>
             <Form.Group as={Col} controlId="street_number">
               <Form.Label>Street Number</Form.Label>
               <Form.Control type="text" name="streetNumber" placeholder="Enter street number"
-                value={formState.streetNumber} onChange={((event) => handleChange(event))}/>
+                value={formState.streetNumber} onChange={handleChange}/>
             </Form.Group>
           </Col>
         </Row>
@@ -111,14 +118,14 @@ function RegistrationForm() {
             <Form.Group as={Col} controlId="locality">
               <Form.Label>City</Form.Label>
               <Form.Control type="text" name="city" placeholder="Enter city"
-                value={formState.city} onChange={((event) => handleChange(event))}/>
+                value={formState.city} onChange={handleChange}/>
             </Form.Group>
           </Col>
           <Col xs={4}>
             <Form.Group as={Col} controlId="sublocality_level_1">
               <Form.Label>Area</Form.Label>
               <Form.Control type="text" name="area" placeholder="Enter Area"
-                value={formState.area} onChange={((event) => handleChange(event))}/>
+                value={formState.area} onChange={handleChange}/>
             </Form.Group>
           </Col>
         </Row>
@@ -127,14 +134,14 @@ function RegistrationForm() {
             <Form.Group as={Col} controlId="country">
               <Form.Label>Country</Form.Label>
               <Form.Control type="text" name="country" placeholder="Country"
-                value={formState.country} onChange={((event) => handleChange(event))}/>
+                value={formState.country} onChange={handleChange}/>
             </Form.Group>
           </Col>
         </Row>
         <Row className="mb-3">
           <Form.Group className="mb-3" id="formGridAgeConfirmation">
             <Form.Check type="checkbox" name="ageConfirmation" id="age-confirmation"
-              label="I am older than 18" value={formState.ageConfirmation} onChange={((event) => handleChange(event))}/>
+              label="I am older than 18" value={formState.ageConfirmation} onChange={handleChange}/>
           </Form.Group>
         </Row>
         <Row className="mb-3">

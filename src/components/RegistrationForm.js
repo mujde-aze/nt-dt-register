@@ -16,7 +16,6 @@ function RegistrationForm() {
     age: "",
     street: "",
     flatNumber: "",
-    streetNumber: "",
     city: "",
     area: "",
     country: "",
@@ -58,7 +57,6 @@ function RegistrationForm() {
     };
 
     setFormState({...formState, street: getAddressComp("street_number") + " " + getAddressComp("route"),
-      streetNumber: getAddressComp("street_number"),
       city: getAddressComp("locality"),
       area: getAddressComp("sublocality_level_1"),
       country: getAddressComp("country"),
@@ -130,13 +128,6 @@ function RegistrationForm() {
               <Form.Label>Flat Number</Form.Label>
               <Form.Control type="text" name="flatNumber" placeholder="Enter flat number"
                 value={formState.flatNumber} onChange={handleChange}/>
-            </Form.Group>
-          </Col>
-          <Col xs={4}>
-            <Form.Group as={Col} controlId="street_number">
-              <Form.Label>Street Number</Form.Label>
-              <Form.Control type="text" name="streetNumber" placeholder="Enter street number"
-                value={formState.streetNumber} onChange={handleChange}/>
             </Form.Group>
           </Col>
         </Row>

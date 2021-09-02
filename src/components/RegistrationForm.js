@@ -1,5 +1,5 @@
 import {Button, Col, Form, Row} from "react-bootstrap";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import useGoogleAutoComplete from "../Hooks/GoogleAutoComplete";
 
 function RegistrationForm() {
@@ -17,13 +17,14 @@ function RegistrationForm() {
     ageConfirmation: "",
   });
 
-  console.log(placeItems);
-  if (placeItems !== undefined) {
-    setFormState({...formState, ...placeItems});
-  }
+  useEffect(() => {
+    if (placeItems !== undefined) {
+      setFormState((prevState) => ({...prevState, ...placeItems}));
+    }
+  }, [placeItems]);
 
   function handleChange(event) {
-    setFormState({...formState, [event.target.name]: event.target.value});
+    setFormState((prevState) => ({...prevState, [event.target.name]: event.target.value}));
   }
 
   function handleSubmit(event) {

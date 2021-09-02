@@ -1,7 +1,6 @@
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {useEffect, useRef, useState} from "react";
 import {Loader} from "@googlemaps/js-api-loader";
-import {initMap} from "../Services/GoogleAutocomplete";
 
 const loader = new Loader({
   apiKey: process.env.REACT_APP_API_KEY,
@@ -26,17 +25,45 @@ function RegistrationForm() {
 
   useEffect(() => {
     loader.load()
-        .then((/* google*/) => {
-          initMap();
-          /* new google.maps.places.Autocomplete(streetElement.current, {
+        .then((google) => {
+          const autocomplete = new google.maps.places.Autocomplete(streetElement.current, {
             componentRestrictions: {country: ["aze"]},
             fields: ["address_components", "geometry"],
             types: ["address"],
-          });*/
+          });
+          autocomplete.addListener("place_changed", () => {
+            const place = autocomplete.getPlace();
+            fillInAddress(place);
+          });
         }).catch((e) => {
           console.error(`Failed to load autocomplete: ${e}`);
         });
   }, []);
+
+  function fillInAddress(place) {
+    const addressNameFormat = {
+      "street_number": "short_name",
+      "route": "long_name",
+      "locality": "long_name",
+      "sublocality_level_1": "short_name",
+      "country": "long_name",
+    };
+    const getAddressComp = function(type) {
+      for (const component of place.address_components) {
+        if (component.types[0] === type) {
+          return component[addressNameFormat[type]];
+        }
+      }
+      return "";
+    };
+
+    setFormState({...formState, street: getAddressComp("street_number") + " " + getAddressComp("route"),
+      streetNumber: getAddressComp("street_number"),
+      city: getAddressComp("locality"),
+      area: getAddressComp("sublocality_level_1"),
+      country: getAddressComp("country"),
+    });
+  }
 
   function handleChange(event) {
     const newFormState = {...formState};

@@ -24,7 +24,11 @@ function RegistrationForm() {
   }, [placeItems]);
 
   function handleChange(event) {
-    setFormState((prevState) => ({...prevState, [event.target.name]: event.target.value}));
+    if (event.target.name === "ageConfirmation") {
+      setFormState((prevState) => ({...prevState, [event.target.name]: event.target.checked}));
+    } else {
+      setFormState((prevState) => ({...prevState, [event.target.name]: event.target.value}));
+    }
   }
 
   function handleSubmit(event) {

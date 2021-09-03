@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# NT Postman View
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Allows new contacts to register with DT and request an NT
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Overview](#overview)
+- [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installing](#installing)
+- [Running the tests](#running-the-tests)
+- [Branching Model](#branching-model)
+- [Deployment](#deployment)
+- [Built With](#built-with)
+- [Versioning](#versioning)
+- [Issue Tracking](#issue-tracking)
+- [Documentation](#documentation)
+    - [Project Documentation](#project-documentation)
+    - [Recommended Reading](#recommended-reading)
+- [Authors](#authors)
 
-### `npm start`
+## Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Allow contacts to register with DT and request NTs.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+As this is a standard Reactjs application, please follow the [Getting Started](https://reactjs.org/) guide from the Reactjs website. Aside from that, we also use the Firebase client SDK for
+interacting with firebase functions. If running locally, consider using the [Firebase emulator](https://firebase.google.com/docs/emulator-suite/connect_auth) to connect auth and give you a near prod-like
+environment to develop against.
 
-### `npm run build`
+Finally, Firebase needs a number of configuration variables set in the environment. This typically can be checked into source control but I've opted not to do so because of my paranoia.
+So to get Firebase going, you can create a local .env file in your application root directory with the contents of your Firebase application config: Firebase Web Console -> Project Settings -> General.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installing
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To run locally, issue `npm run start`. This should launch the application in a new window provided the prerequisites above have been satisfied.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Running the tests
 
-### `npm run eject`
+To run the tests, issue `npm run test`.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Branching Model
+We use [GitHubFlow](https://guides.github.com/introduction/flow/) for this project.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Deployment
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+The CI/CD pipeline takes care of deployment once you create a [semver](https://semver.org/) compliant tag.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Built With
 
-## Learn More
+* [ReactJS](https://reactjs.org/) - The web framework used
+* [Firebase](https://firebase.google.com/) - Authentication
+* [React-Bootstrap](https://react-bootstrap.github.io/) - UI Components
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Versioning
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+We use [Semantic Versioning](http://semver.org/).
 
-### Code Splitting
+## Issue Tracking
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Issues are tracked in this project's issue tracker.
 
-### Analyzing the Bundle Size
+## Documentation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Project Documentation
 
-### Making a Progressive Web App
+* [Github Project](https://github.com/orgs/mujde-aze/projects)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Recommended Reading
 
-### Advanced Configuration
+* [Firebase callable functions](https://firebase.google.com/docs/functions/callable)
+* [Connecting to the auth emulator](https://firebase.google.com/docs/emulator-suite/connect_auth)
+* [Enabling App Check enforcement](https://firebase.google.com/docs/app-check/cloud-functions)
+* [ReactJS Hooks](https://reactjs.org/docs/hooks-intro.html)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Authors
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* **Crafton Williams** - *Initial work*

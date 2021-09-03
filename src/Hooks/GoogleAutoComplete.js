@@ -16,7 +16,7 @@ function useGoogleAutoComplete(streetElement) {
         .then((google) => {
           const autocomplete = new google.maps.places.Autocomplete(streetElement.current, {
             componentRestrictions: {country: ["aze"]},
-            fields: ["address_components", "geometry"],
+            fields: ["address_components"],
             types: ["address"],
           });
           autocomplete.addListener("place_changed", () => {
@@ -41,7 +41,8 @@ function useGoogleAutoComplete(streetElement) {
               return "";
             };
 
-            setPlaceItems({street: getAddressComp("street_number") + " " + getAddressComp("route"),
+            setPlaceItems({
+              street: getAddressComp("street_number") + " " + getAddressComp("route"),
               city: getAddressComp("locality"),
               area: getAddressComp("sublocality_level_1"),
               country: getAddressComp("country"),

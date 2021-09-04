@@ -5,12 +5,11 @@ import RegistrationForm from "./components/RegistrationForm";
 
 function App() {
   return (
-    <Container fluid>
+    <Container>
       <Row>
         <Col></Col>
       </Row>
       <Row>
-        <Col></Col>
         <Col>
           <BrowserRouter>
             <Switch>
@@ -23,7 +22,6 @@ function App() {
             </Switch>
           </BrowserRouter>
         </Col>
-        <Col></Col>
       </Row>
       <Row>
         <Col></Col>

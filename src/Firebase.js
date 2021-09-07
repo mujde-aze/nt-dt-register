@@ -16,7 +16,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 if (!process.env.REACT_APP_DEV_MODE) {
   // eslint-disable-next-line no-unused-vars
   const appCheck = initializeAppCheck(firebaseApp, {
-    provider: new ReCaptchaV3Provider(process.env.RE),
+    provider: new ReCaptchaV3Provider(process.env.REACT_APP_APP_CHECK_PUBLIC_KEY),
     isTokenAutoRefreshEnabled: true,
   });
 }

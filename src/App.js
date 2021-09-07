@@ -2,8 +2,9 @@ import "./App.css";
 import {Col, Container, Row} from "react-bootstrap";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import RegistrationForm from "./components/RegistrationForm";
+import PropTypes from "prop-types";
 
-function App() {
+function App({firebase}) {
   return (
     <Container>
       <Row>
@@ -17,7 +18,7 @@ function App() {
 
               </Route>
               <Route path="/">
-                <RegistrationForm />
+                <RegistrationForm firebase={firebase} />
               </Route>
             </Switch>
           </BrowserRouter>
@@ -29,5 +30,9 @@ function App() {
     </Container>
   );
 }
+
+App.propTypes = {
+  firebase: PropTypes.object,
+};
 
 export default App;

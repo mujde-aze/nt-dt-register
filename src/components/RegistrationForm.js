@@ -1,10 +1,15 @@
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {useEffect, useRef, useState} from "react";
 import useGoogleAutoComplete from "../Hooks/GoogleAutoComplete";
+import useScript from "../Hooks/ExternalScript";
+import {getFunctions, httpsCallable, connectFunctionsEmulator} from "firebase/functions";
+import PropTypes from "prop-types";
 
-function RegistrationForm() {
+function RegistrationForm({firebase}) {
   const streetElement = useRef();
   const placeItems = useGoogleAutoComplete(streetElement);
+  useScript("https://www.google.com/recaptcha/api.js");
+
   const [formState, setFormState] = useState({
     givenName: "",
     surname: "",
@@ -15,6 +20,7 @@ function RegistrationForm() {
     area: "",
     country: "",
     ageConfirmation: "",
+    source: "google",
   });
 
   useEffect(() => {
@@ -31,14 +37,27 @@ function RegistrationForm() {
     }
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    console.log(formState);
+  async function handleSubmit(token) {
+    const functions = getFunctions(firebase, "australia-southeast1");
+    if (process.env.REACT_APP_DEV_MODE) {
+      connectFunctionsEmulator(functions, "localhost", 5001);
+    }
+    const registerContact = httpsCallable(functions, "registerContact");
+    try {
+      await registerContact({
+        registrationRequest: formState,
+        captchaToken: token,
+      });
+    } catch (error) {
+      console.error(`Failed to register contact: ${error}`);
+    }
   }
+
+  window.handleSubmit = handleSubmit;
 
   return (
     <div>
-      <Form onSubmit={handleSubmit}>
+      <Form>
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridGivenName">
             <Form.Label>Given Name</Form.Label>
@@ -117,7 +136,9 @@ function RegistrationForm() {
         </Row>
         <Row className="mb-3">
           <Col xs={3}>
-            <Button variant="primary" type="submit">
+            <Button className="g-recaptcha" data-sitekey={process.env.REACT_APP_APP_CHECK_PUBLIC_KEY}
+              data-callback="handleSubmit"
+              variant="primary" type="submit">
             Submit
             </Button>
           </Col>
@@ -126,5 +147,9 @@ function RegistrationForm() {
     </div>
   );
 }
+
+RegistrationForm.propTypes = {
+  firebase: PropTypes.object,
+};
 
 export default RegistrationForm;

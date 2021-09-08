@@ -1,14 +1,12 @@
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {useEffect, useRef, useState} from "react";
 import useGoogleAutoComplete from "../Hooks/GoogleAutoComplete";
-// import useScript from "../Hooks/ExternalScript";
 import {getFunctions, httpsCallable, connectFunctionsEmulator} from "firebase/functions";
 import PropTypes from "prop-types";
 
 function RegistrationForm({firebase}) {
   const streetElement = useRef();
   const placeItems = useGoogleAutoComplete(streetElement);
-  // useScript("https://www.google.com/recaptcha/api.js");
 
   const [formState, setFormState] = useState({
     givenName: "",
@@ -47,7 +45,6 @@ function RegistrationForm({firebase}) {
     try {
       await registerContact({
         registrationRequest: formState,
-      //  captchaToken: token,
       });
       console.log("Successfully registered contact.");
     } catch (error) {

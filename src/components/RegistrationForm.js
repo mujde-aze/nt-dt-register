@@ -1,14 +1,14 @@
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {useEffect, useRef, useState} from "react";
 import useGoogleAutoComplete from "../Hooks/GoogleAutoComplete";
-import useScript from "../Hooks/ExternalScript";
+// import useScript from "../Hooks/ExternalScript";
 import {getFunctions, httpsCallable, connectFunctionsEmulator} from "firebase/functions";
 import PropTypes from "prop-types";
 
 function RegistrationForm({firebase}) {
   const streetElement = useRef();
   const placeItems = useGoogleAutoComplete(streetElement);
-  useScript("https://www.google.com/recaptcha/api.js");
+  // useScript("https://www.google.com/recaptcha/api.js");
 
   const [formState, setFormState] = useState({
     givenName: "",
@@ -37,7 +37,8 @@ function RegistrationForm({firebase}) {
     }
   }
 
-  async function handleSubmit(token) {
+  async function handleSubmit(event) {
+    event.preventDefault();
     const functions = getFunctions(firebase, "australia-southeast1");
     if (process.env.REACT_APP_DEV_MODE) {
       connectFunctionsEmulator(functions, "localhost", 5001);
@@ -46,7 +47,7 @@ function RegistrationForm({firebase}) {
     try {
       await registerContact({
         registrationRequest: formState,
-        captchaToken: token,
+      //  captchaToken: token,
       });
       console.log("Successfully registered contact.");
     } catch (error) {
@@ -54,11 +55,9 @@ function RegistrationForm({firebase}) {
     }
   }
 
-  window.handleSubmit = handleSubmit;
-
   return (
     <div>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridGivenName">
             <Form.Label>Given Name</Form.Label>
@@ -137,9 +136,7 @@ function RegistrationForm({firebase}) {
         </Row>
         <Row className="mb-3">
           <Col xs={3}>
-            <Button className="g-recaptcha" data-sitekey={process.env.REACT_APP_APP_CHECK_PUBLIC_KEY}
-              data-callback="handleSubmit"
-              variant="primary" type="submit">
+            <Button variant="primary" type="submit">
             Submit
             </Button>
           </Col>

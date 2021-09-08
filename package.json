@@ -1,6 +1,6 @@
 {
   "name": "nt-dt-register",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": true,
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.12.2",

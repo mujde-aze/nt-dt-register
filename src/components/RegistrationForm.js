@@ -2,7 +2,7 @@ import {Button, Col, Form, Row} from "react-bootstrap";
 import {useEffect, useRef, useState} from "react";
 import useGoogleAutoComplete from "../Hooks/GoogleAutoComplete";
 import useScript from "../Hooks/ExternalScript";
-// import {getFunctions, httpsCallable, connectFunctionsEmulator} from "firebase/functions";
+import {getFunctions, httpsCallable, connectFunctionsEmulator} from "firebase/functions";
 import PropTypes from "prop-types";
 
 function RegistrationForm({firebase}) {
@@ -38,7 +38,7 @@ function RegistrationForm({firebase}) {
   }
 
   async function handleSubmit(token) {
-    /* const functions = getFunctions(firebase, "australia-southeast1");
+    const functions = getFunctions(firebase, "australia-southeast1");
     if (process.env.REACT_APP_DEV_MODE) {
       connectFunctionsEmulator(functions, "localhost", 5001);
     }
@@ -48,11 +48,10 @@ function RegistrationForm({firebase}) {
         registrationRequest: formState,
         captchaToken: token,
       });
+      console.log("Successfully registered contact.");
     } catch (error) {
       console.error(`Failed to register contact: ${error}`);
-    }*/
-    console.log(token);
-    console.log(formState);
+    }
   }
 
   window.handleSubmit = handleSubmit;

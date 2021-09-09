@@ -5,8 +5,8 @@ import {getFunctions, httpsCallable, connectFunctionsEmulator} from "firebase/fu
 import PropTypes from "prop-types";
 
 function RegistrationForm({firebase}) {
-  const streetElement = useRef();
-  const placeItems = useGoogleAutoComplete(streetElement);
+  const cityElement = useRef();
+  const placeItems = useGoogleAutoComplete(cityElement);
 
   const [formState, setFormState] = useState({
     givenName: "",
@@ -85,9 +85,9 @@ function RegistrationForm({firebase}) {
           </Col>
         </Row>
         <Row className="mb-3">
-          <Form.Group as={Col} controlId="location">
+          <Form.Group as={Col} controlId="formGridStreet">
             <Form.Label>Street Name</Form.Label>
-            <Form.Control ref={streetElement} type="text" name="street" placeholder="Enter street name"
+            <Form.Control type="text" name="street" placeholder="Enter street name"
               value={formState.street} onChange={handleChange}/>
           </Form.Group>
         </Row>
@@ -104,8 +104,8 @@ function RegistrationForm({firebase}) {
           <Col xs={4}>
             <Form.Group as={Col} controlId="locality">
               <Form.Label>City</Form.Label>
-              <Form.Control type="text" name="city" placeholder="Enter city"
-                value={formState.city} onChange={handleChange}/>
+              <Form.Control ref={cityElement} type="text" name="city" placeholder="Enter city"
+                onChange={handleChange}/>
             </Form.Group>
           </Col>
           <Col xs={4}>

@@ -3,7 +3,7 @@
   "version": "0.3.4",
   "private": true,
   "dependencies": {
-    "@googlemaps/js-api-loader": "^1.12.2",
+    "@googlemaps/react-wrapper": "^1.1.5",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",

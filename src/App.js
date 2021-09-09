@@ -3,6 +3,7 @@ import {Col, Container, Row} from "react-bootstrap";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import RegistrationForm from "./components/RegistrationForm";
 import PropTypes from "prop-types";
+import {Wrapper} from "@googlemaps/react-wrapper";
 
 function App({firebase}) {
   return (
@@ -18,7 +19,9 @@ function App({firebase}) {
 
               </Route>
               <Route path="/">
-                <RegistrationForm firebase={firebase} />
+                <Wrapper libraries={["places"]} apiKey={process.env.REACT_APP_API_KEY}>
+                  <RegistrationForm firebase={firebase} />
+                </Wrapper>
               </Route>
             </Switch>
           </BrowserRouter>

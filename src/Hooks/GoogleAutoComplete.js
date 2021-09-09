@@ -1,59 +1,41 @@
-import {useState} from "react";
-import {Loader} from "@googlemaps/js-api-loader";
+import {useEffect, useState} from "react";
 
-const loader = new Loader({
-  apiKey: process.env.REACT_APP_API_KEY,
-  version: "weekly",
-  libraries: ["places"],
-});
-
-function useGoogleAutoComplete(streetElement) {
+function useGoogleAutoComplete(cityElement) {
   const [placeItems, setPlaceItems] = useState(undefined);
-  const [autoCompleteLoaded, setAutoCompleteLoaded] = useState(false);
 
-  if (!autoCompleteLoaded && streetElement.current) {
-    loader.load()
-        .then((google) => {
-          const autocomplete = new google.maps.places.Autocomplete(streetElement.current, {
-            componentRestrictions: {country: ["aze"]},
-            fields: ["address_components"],
-            types: ["address"],
-          });
-          autocomplete.addListener("place_changed", () => {
-            const place = autocomplete.getPlace();
-            populatePlaceItems(place);
-          });
+  useEffect(() => {
+    const autocomplete = new window.google.maps.places.Autocomplete(cityElement.current, {
+      componentRestrictions: {country: ["aze"]},
+      fields: ["address_components"],
+      types: ["(regions)"],
+    });
+    autocomplete.addListener("place_changed", () => {
+      const place = autocomplete.getPlace();
+      populatePlaceItems(place);
+    });
 
-          function populatePlaceItems(place) {
-            const addressNameFormat = {
-              "street_number": "short_name",
-              "route": "long_name",
-              "locality": "long_name",
-              "sublocality_level_1": "short_name",
-              "country": "long_name",
-            };
-            const getAddressComp = function(type) {
-              for (const component of place.address_components) {
-                if (component.types[0] === type) {
-                  return component[addressNameFormat[type]];
-                }
-              }
-              return "";
-            };
-
-            setPlaceItems({
-              street: getAddressComp("street_number") + " " + getAddressComp("route"),
-              city: getAddressComp("locality"),
-              area: getAddressComp("sublocality_level_1"),
-              country: getAddressComp("country"),
-            });
+    function populatePlaceItems(place) {
+      const addressNameFormat = {
+        "locality": "long_name",
+        "sublocality_level_1": "short_name",
+        "country": "long_name",
+      };
+      const getAddressComp = function(type) {
+        for (const component of place.address_components) {
+          if (component.types[0] === type) {
+            return component[addressNameFormat[type]];
           }
-
-          setAutoCompleteLoaded(true);
-        }).catch((e) => {
-          console.error(`Failed to load autocomplete: ${e}`);
-        });
-  }
+        }
+        return "";
+      };
+      cityElement.current.value = getAddressComp("locality");
+      setPlaceItems({
+        city: getAddressComp("locality"),
+        area: getAddressComp("sublocality_level_1"),
+        country: getAddressComp("country"),
+      });
+    }
+  }, [cityElement]);
 
   return placeItems;
 }

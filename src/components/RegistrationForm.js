@@ -5,8 +5,8 @@ import {getFunctions, httpsCallable, connectFunctionsEmulator} from "firebase/fu
 import PropTypes from "prop-types";
 
 function RegistrationForm({firebase}) {
-  const cityElement = useRef();
-  const placeItems = useGoogleAutoComplete(cityElement);
+  const provinceElement = useRef();
+  const placeItems = useGoogleAutoComplete(provinceElement);
 
   const [formState, setFormState] = useState({
     givenName: "",
@@ -14,8 +14,8 @@ function RegistrationForm({firebase}) {
     age: "",
     street: "",
     flatNumber: "",
-    city: "",
-    area: "",
+    province: "",
+    cityVillage: "",
     country: "",
     ageConfirmation: "",
     source: "google",
@@ -103,16 +103,16 @@ function RegistrationForm({firebase}) {
         <Row className="mb-3">
           <Col xs={4}>
             <Form.Group as={Col} controlId="locality">
-              <Form.Label>City</Form.Label>
-              <Form.Control ref={cityElement} type="text" name="city" placeholder="Enter city"
+              <Form.Label>Province</Form.Label>
+              <Form.Control ref={provinceElement} type="text" name="province" placeholder="Enter province"
                 onChange={handleChange}/>
             </Form.Group>
           </Col>
           <Col xs={4}>
             <Form.Group as={Col} controlId="sublocality_level_1">
-              <Form.Label>Area</Form.Label>
-              <Form.Control type="text" name="area" placeholder="Enter Area"
-                value={formState.area} onChange={handleChange}/>
+              <Form.Label>City/Village</Form.Label>
+              <Form.Control type="text" name="cityVillage" placeholder="Enter city of village"
+                value={formState.cityVillage} onChange={handleChange}/>
             </Form.Group>
           </Col>
         </Row>

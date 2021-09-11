@@ -59,3 +59,7 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_NT_DT_REGISTER_8AFFC }}'
           channelId: live
           projectId: nt-dt-register-8affc
+      - uses: ncipollo/release-action@v1
+        with:
+          bodyFile: "CHANGELOG.md"
+          token: ${{ secrets.GITHUB_TOKEN }}

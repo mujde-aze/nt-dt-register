@@ -53,12 +53,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Google places Autocomplete integration
 
-[0.4.2]: https://github.com/mujde-aze/nt-postman-view/compare/v0.4.1...v0.4.2
-[0.4.1]: https://github.com/mujde-aze/nt-postman-view/compare/v0.4.0...v0.4.1
-[0.4.0]: https://github.com/mujde-aze/nt-postman-view/compare/v0.3.4...v0.4.0
-[0.3.4]: https://github.com/mujde-aze/nt-postman-view/compare/v0.3.2...v0.3.4
-[0.3.2]: https://github.com/mujde-aze/nt-postman-view/compare/v0.3.1...v0.3.2
-[0.3.1]: https://github.com/mujde-aze/nt-postman-view/compare/v0.3.0...v0.3.1
-[0.3.0]: https://github.com/mujde-aze/nt-postman-view/compare/v0.2.1...v0.3.0
-[0.2.1]: https://github.com/mujde-aze/nt-postman-view/compare/v0.2.0...v0.2.1
-[0.2.0]: https://github.com/mujde-aze/nt-postman-view/compare/v0.2.0...HEAD
+[0.4.2]: https://github.com/mujde-aze/nt-dt-register/compare/v0.4.1...v0.4.2
+[0.4.1]: https://github.com/mujde-aze/nt-dt-register/compare/v0.4.0...v0.4.1
+[0.4.0]: https://github.com/mujde-aze/nt-dt-register/compare/v0.3.4...v0.4.0
+[0.3.4]: https://github.com/mujde-aze/nt-dt-register/compare/v0.3.2...v0.3.4
+[0.3.2]: https://github.com/mujde-aze/nt-dt-register/compare/v0.3.1...v0.3.2
+[0.3.1]: https://github.com/mujde-aze/nt-dt-register/compare/v0.3.0...v0.3.1
+[0.3.0]: https://github.com/mujde-aze/nt-dt-register/compare/v0.2.1...v0.3.0
+[0.2.1]: https://github.com/mujde-aze/nt-dt-register/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/mujde-aze/nt-dt-register/compare/v0.2.0...HEAD

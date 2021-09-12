@@ -19,7 +19,7 @@ function App({firebase}) {
 
               </Route>
               <Route path="/">
-                <Wrapper libraries={["places"]} apiKey={process.env.REACT_APP_API_KEY}>
+                <Wrapper libraries={["places"]} language="az" apiKey={process.env.REACT_APP_API_KEY}>
                   <RegistrationForm firebase={firebase} />
                 </Wrapper>
               </Route>

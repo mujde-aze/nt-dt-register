@@ -1,4 +1,4 @@
-# NT Postman View
+# NT Contact Register
 
 Allows new contacts to register with DT and request an NT
 

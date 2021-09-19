@@ -6,14 +6,17 @@ import PropTypes from "prop-types";
 
 function RegistrationForm({firebase}) {
   const provinceElement = useRef();
+  const form = useRef();
   const placeItems = useGoogleAutoComplete(provinceElement);
 
+  const [validated, setValidated] = useState(false);
   const [formState, setFormState] = useState({
     givenName: "",
     surname: "",
+    phoneNumber: "",
     age: "",
     street: "",
-    flatNumber: "",
+    streetNumber: "",
     province: "",
     cityVillage: "",
     country: "",
@@ -36,6 +39,10 @@ function RegistrationForm({firebase}) {
   }
 
   async function handleSubmit(token) {
+    setValidated(true);
+    if (form.current.checkValidity() === false) {
+      return;
+    }
     const functions = getFunctions(firebase, "australia-southeast1");
     if (process.env.REACT_APP_DEV_MODE) {
       connectFunctionsEmulator(functions, "localhost", 5001);
@@ -55,26 +62,29 @@ function RegistrationForm({firebase}) {
   window.handleSubmit = handleSubmit;
 
   return (
-    <Form>
+    <Form ref={form} validated={validated}>
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formGridGivenName">
-          <Form.Label>Given Name</Form.Label>
-          <Form.Control type="text" name="givenName" placeholder="Enter given name"
+          <Form.Label>Ad</Form.Label>
+          <Form.Control required type="text" name="givenName" placeholder="Ad"
             value={formState.givenName} onChange={handleChange}/>
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid name.
+          </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridSurname">
-          <Form.Label>Surname</Form.Label>
-          <Form.Control type="text" name="surname" placeholder="Enter surname"
+          <Form.Label>Soyad</Form.Label>
+          <Form.Control type="text" name="surname" placeholder="Soyad"
             value={formState.surname} onChange={handleChange}/>
         </Form.Group>
       </Row>
       <Row className="mb-3">
         <Col xs={4}>
           <Form.Group as={Col} controlId="formGridAge">
-            <Form.Label>Age</Form.Label>
-            <Form.Select name="age" value={formState.age} onChange={handleChange}>
-              <option>Select your age group</option>
+            <Form.Label>Neçə yaşınız var?</Form.Label>
+            <Form.Select required name="age" value={formState.age} onChange={handleChange}>
+              <option></option>
               <option>18-22</option>
               <option>23-25</option>
               <option>26-30</option>
@@ -87,32 +97,35 @@ function RegistrationForm({firebase}) {
       </Row>
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formGridStreet">
-          <Form.Label>Street Name</Form.Label>
-          <Form.Control type="text" name="street" placeholder="Enter street name"
+          <Form.Label>Əv ünvanınız</Form.Label>
+          <Form.Control type="text" name="street" placeholder="Əv ünvanınız"
             value={formState.street} onChange={handleChange}/>
         </Form.Group>
       </Row>
       <Row className="mb-3">
         <Col xs={4}>
-          <Form.Group as={Col} controlId="formGridFlatNumber">
-            <Form.Label>Flat Number</Form.Label>
-            <Form.Control type="text" name="flatNumber" placeholder="Enter flat number"
-              value={formState.flatNumber} onChange={handleChange}/>
+          <Form.Group as={Col} controlId="formGridStreetNumber">
+            <Form.Label>Küçə nömrəniz</Form.Label>
+            <Form.Control type="text" name="streetNumber" placeholder="Küçə nömrəniz"
+              value={formState.streetNumber} onChange={handleChange}/>
           </Form.Group>
         </Col>
       </Row>
       <Row className="mb-3">
         <Col xs={4}>
           <Form.Group as={Col} controlId="locality">
-            <Form.Label>Province</Form.Label>
-            <Form.Control ref={provinceElement} type="text" name="province" placeholder="Enter province"
+            <Form.Label>Hansı şəhərdə/rayonda yaşayırsız</Form.Label>
+            <Form.Control required ref={provinceElement} type="text" name="province"
               onChange={handleChange}/>
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid province.
+            </Form.Control.Feedback>
           </Form.Group>
         </Col>
         <Col xs={4}>
           <Form.Group as={Col} controlId="sublocality_level_1">
-            <Form.Label>City/Village</Form.Label>
-            <Form.Control type="text" name="cityVillage" placeholder="Enter city of village"
+            <Form.Label>Bakıda qalırsanız xahiş edirik rayon adı yazın</Form.Label>
+            <Form.Control type="text" name="cityVillage"
               value={formState.cityVillage} onChange={handleChange}/>
           </Form.Group>
         </Col>
@@ -120,16 +133,29 @@ function RegistrationForm({firebase}) {
       <Row className="mb-3">
         <Col xs={4}>
           <Form.Group as={Col} controlId="country">
-            <Form.Label>Country</Form.Label>
-            <Form.Control type="text" name="country" placeholder="Country"
+            <Form.Label>ölkə</Form.Label>
+            <Form.Control type="text" name="country" placeholder="ölkə"
               value={formState.country} onChange={handleChange}/>
           </Form.Group>
         </Col>
       </Row>
       <Row className="mb-3">
+        <Col xs={4}>
+          <Form.Group as={Col} controlId="formGridPhoneNumber">
+            <Form.Label>Telefon Nömrəniz</Form.Label>
+            <Form.Control required type="text" name="phoneNumber" placeholder="Telefon Nömrəniz"
+              value={formState.phoneNumber} onChange={handleChange}/>
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid phone number.
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Col>
+      </Row>
+      <Row className="mb-3">
         <Form.Group className="mb-3" id="formGridAgeConfirmation">
-          <Form.Check type="checkbox" name="ageConfirmation" id="age-confirmation"
-            label="I am older than 18" value={formState.ageConfirmation} onChange={handleChange}/>
+          <Form.Check required type="checkbox" name="ageConfirmation" id="age-confirmation"
+            label="o Yaşım 18-dən yuxarıdır" value={formState.ageConfirmation} onChange={handleChange}
+            feedback="Təqdim etməzdən əvvəl 18 yaşdan yuxarı olduğunuzu təsdiq etməlisiniz"/>
         </Form.Group>
       </Row>
       <Row className="mb-3">

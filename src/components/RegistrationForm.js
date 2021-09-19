@@ -69,7 +69,7 @@ function RegistrationForm({firebase}) {
           <Form.Control required type="text" name="givenName" placeholder="Ad"
             value={formState.givenName} onChange={handleChange}/>
           <Form.Control.Feedback type="invalid">
-            Please provide a valid name.
+            Zəhmət olmasa adınızı verin.
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -92,6 +92,9 @@ function RegistrationForm({firebase}) {
               <option>41-60</option>
               <option>60+</option>
             </Form.Select>
+            <Form.Control.Feedback type="invalid">
+              Zəhmət olmasa yaş qrupunuzu seçin.
+            </Form.Control.Feedback>
           </Form.Group>
         </Col>
       </Row>
@@ -118,7 +121,7 @@ function RegistrationForm({firebase}) {
             <Form.Control required ref={provinceElement} type="text" name="province"
               onChange={handleChange}/>
             <Form.Control.Feedback type="invalid">
-              Please provide a valid province.
+              Zəhmət olmasa etibarlı bir əyalət göstərin.
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
@@ -143,10 +146,10 @@ function RegistrationForm({firebase}) {
         <Col xs={4}>
           <Form.Group as={Col} controlId="formGridPhoneNumber">
             <Form.Label>Telefon Nömrəniz</Form.Label>
-            <Form.Control required type="text" name="phoneNumber" placeholder="Telefon Nömrəniz"
+            <Form.Control required pattern="[0-9]{9}" type="text" name="phoneNumber" placeholder="Telefon Nömrəniz"
               value={formState.phoneNumber} onChange={handleChange}/>
             <Form.Control.Feedback type="invalid">
-              Please provide a valid phone number.
+              Zəhmət olmasa etibarlı 9 rəqəmli telefon nömrəsi göstərin.
             </Form.Control.Feedback>
           </Form.Group>
         </Col>

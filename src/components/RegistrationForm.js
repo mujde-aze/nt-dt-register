@@ -3,8 +3,10 @@ import {useEffect, useRef, useState} from "react";
 import useGoogleAutoComplete from "../Hooks/GoogleAutoComplete";
 import {getFunctions, httpsCallable, connectFunctionsEmulator} from "firebase/functions";
 import PropTypes from "prop-types";
+import useFbPixelScript from "../Hooks/FbPixelScript";
 
 function RegistrationForm({firebase}) {
+  useFbPixelScript();
   const provinceElement = useRef();
   const form = useRef();
   const placeItems = useGoogleAutoComplete(provinceElement);

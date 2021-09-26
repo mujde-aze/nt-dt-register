@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2021-09-27
+
+### Added
+- Support for Google tag manager to manage Facebook pixel script
+
+### Removed
+- Direct injection of Facebook pixel script
+
 ## [0.5.0] - 2021-09-20
 
 ### Added
@@ -64,6 +72,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Google places Autocomplete integration
 
+[0.6.0]: https://github.com/mujde-aze/nt-dt-register/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/mujde-aze/nt-dt-register/compare/v0.4.3...v0.5.0
 [0.4.3]: https://github.com/mujde-aze/nt-dt-register/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/mujde-aze/nt-dt-register/compare/v0.4.1...v0.4.2

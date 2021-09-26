@@ -1,12 +1,12 @@
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {useEffect, useRef, useState} from "react";
 import useGoogleAutoComplete from "../Hooks/GoogleAutoComplete";
-import {getFunctions, httpsCallable, connectFunctionsEmulator} from "firebase/functions";
+import {connectFunctionsEmulator, getFunctions, httpsCallable} from "firebase/functions";
 import PropTypes from "prop-types";
-import useFbPixelScript from "../Hooks/FbPixelScript";
+import useGoogleTagManager from "../Hooks/GoogleTagManager";
 
 function RegistrationForm({firebase}) {
-  useFbPixelScript();
+  useGoogleTagManager();
   const provinceElement = useRef();
   const form = useRef();
   const placeItems = useGoogleAutoComplete(provinceElement);

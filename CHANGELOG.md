@@ -26,13 +26,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.4.2] - 2021-09-11
 
 ### Added
-- Submit button integration with Recaptcha. Appcheck doesn't automatically submit this token so we have to do it manually
+- Submit button integration with Recaptcha. Appcheck doesn't automatically submit this token, so we have to do it manually
 
 ## [0.4.1] - 2021-09-10
 
 ### Changed
 - Renamed city to province and area to city/village
-- Included administrative_area_level_2 from places results, as this more accurately represents the highes region level within the country
+- Included administrative_area_level_2 from places results, as this more accurately represents the highest region level within the country
 
 ## [0.4.0] - 2021-09-09
 

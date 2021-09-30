@@ -4,6 +4,7 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import RegistrationForm from "./components/RegistrationForm";
 import PropTypes from "prop-types";
 import {Wrapper} from "@googlemaps/react-wrapper";
+import SuccessView from "./components/SuccessView";
 
 function App({firebase}) {
   return (
@@ -16,7 +17,7 @@ function App({firebase}) {
           <BrowserRouter>
             <Switch>
               <Route path="/success">
-
+                <SuccessView />
               </Route>
               <Route path="/">
                 <Wrapper libraries={["places"]} language="az" apiKey={process.env.REACT_APP_API_KEY}>

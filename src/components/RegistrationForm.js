@@ -4,12 +4,14 @@ import useGoogleAutoComplete from "../Hooks/GoogleAutoComplete";
 import {connectFunctionsEmulator, getFunctions, httpsCallable} from "firebase/functions";
 import PropTypes from "prop-types";
 import useGoogleTagManager from "../Hooks/GoogleTagManager";
+import {useHistory} from "react-router-dom";
 
 function RegistrationForm({firebase}) {
   useGoogleTagManager();
   const provinceElement = useRef();
   const form = useRef();
   const placeItems = useGoogleAutoComplete(provinceElement);
+  const history = useHistory();
 
   const [validated, setValidated] = useState(false);
   const [formState, setFormState] = useState({
@@ -56,6 +58,7 @@ function RegistrationForm({firebase}) {
         recaptchaToken: token,
       });
       console.log("Successfully registered contact.");
+      history.push("/success");
     } catch (error) {
       console.error(`Failed to register contact: ${error}`);
     }

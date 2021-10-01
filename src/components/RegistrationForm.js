@@ -1,10 +1,11 @@
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {useEffect, useRef, useState} from "react";
-import useGoogleAutoComplete from "../Hooks/GoogleAutoComplete";
+import useGoogleAutoComplete from "../hooks/GoogleAutoComplete";
 import {connectFunctionsEmulator, getFunctions, httpsCallable} from "firebase/functions";
 import PropTypes from "prop-types";
-import useGoogleTagManager from "../Hooks/GoogleTagManager";
+import useGoogleTagManager from "../hooks/GoogleTagManager";
 import {useHistory} from "react-router-dom";
+import {retrieveSocialNetworkSource} from "../utilities/Helper";
 
 function RegistrationForm({firebase}) {
   useGoogleTagManager();
@@ -25,7 +26,7 @@ function RegistrationForm({firebase}) {
     cityVillage: "",
     country: "",
     ageConfirmation: "",
-    source: "google",
+    source: retrieveSocialNetworkSource(document.referrer),
   });
 
   useEffect(() => {

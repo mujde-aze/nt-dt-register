@@ -1,6 +1,6 @@
 {
   "name": "nt-dt-register",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "private": true,
   "dependencies": {
     "@googlemaps/react-wrapper": "^1.1.5",

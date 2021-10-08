@@ -19,7 +19,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --ext .js src/**"
+    "lint": "eslint --ext .js src/components/** src/hooks/** src/utilities/** src/tests/** src/*.js"
   },
   "eslintConfig": {
     "extends": [

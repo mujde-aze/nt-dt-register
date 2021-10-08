@@ -21,9 +21,7 @@ module.exports = {
   "ignorePatterns": [
     "src/*.css",
     "src/*.svg",
-    "src/*.jpeg",
-    "src/*.jpg",
-    "src/*.png",
+    "src/images/*",
   ],
   "rules": {
     "react-hooks/rules-of-hooks": "error",

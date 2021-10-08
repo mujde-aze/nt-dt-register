@@ -33,7 +33,7 @@ function App({firebase}) {
       </Row>
     </Container>
   );
-}
+};
 
 App.propTypes = {
   firebase: PropTypes.object,

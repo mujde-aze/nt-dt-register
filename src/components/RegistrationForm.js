@@ -1,4 +1,4 @@
-import {Button, Col, Form, Row} from "react-bootstrap";
+import {Button, Col, Form, Row, Spinner} from "react-bootstrap";
 import {useEffect, useRef, useState} from "react";
 import useGoogleAutoComplete from "../hooks/GoogleAutoComplete";
 import {connectFunctionsEmulator, getFunctions, httpsCallable} from "firebase/functions";
@@ -15,6 +15,7 @@ function RegistrationForm({firebase}) {
   const history = useHistory();
 
   const [validated, setValidated] = useState(false);
+  const [showSubmitSpinner, setShowSubmitSpinner] = useState(false);
   const [formState, setFormState] = useState({
     givenName: "",
     surname: "",
@@ -45,7 +46,9 @@ function RegistrationForm({firebase}) {
 
   async function handleSubmit(token) {
     setValidated(true);
+    setShowSubmitSpinner(true);
     if (form.current.checkValidity() === false) {
+      setShowSubmitSpinner(false);
       return;
     }
     const functions = getFunctions(firebase, "australia-southeast1");
@@ -63,9 +66,23 @@ function RegistrationForm({firebase}) {
     } catch (error) {
       console.error(`Failed to register contact: ${error}`);
     }
+    setShowSubmitSpinner(false);
   }
 
   window.handleSubmit = handleSubmit;
+
+  let spinner;
+  if (showSubmitSpinner) {
+    spinner = <Spinner
+      as="span"
+      animation="border"
+      size="sm"
+      role="status"
+      aria-hidden="true"
+    />;
+  } else {
+    spinner = <span />;
+  }
 
   return (
     <Form ref={form} validated={validated}>
@@ -171,7 +188,7 @@ function RegistrationForm({firebase}) {
         <Col xs={3}>
           <Button className="g-recaptcha" data-sitekey={process.env.REACT_APP_APP_CHECK_PUBLIC_KEY}
             data-callback="handleSubmit" variant="primary" type="submit">
-            Submit
+            {spinner} Submit
           </Button>
         </Col>
       </Row>

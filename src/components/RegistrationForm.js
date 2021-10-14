@@ -22,7 +22,6 @@ function RegistrationForm({firebase}) {
     phoneNumber: "",
     age: "",
     street: "",
-    streetNumber: "",
     province: "",
     cityVillage: "",
     country: "",
@@ -108,8 +107,8 @@ function RegistrationForm({firebase}) {
             <Form.Label>Neçə yaşınız var?</Form.Label>
             <Form.Select required name="age" value={formState.age} onChange={handleChange}>
               <option></option>
-              <option>18-22</option>
-              <option>23-25</option>
+              <option>18-21</option>
+              <option>22-25</option>
               <option>26-30</option>
               <option>31-40</option>
               <option>41-60</option>
@@ -122,20 +121,23 @@ function RegistrationForm({firebase}) {
         </Col>
       </Row>
       <Row className="mb-3">
+        <Col xs={4}>
+          <Form.Group as={Col} controlId="formGridPhoneNumber">
+            <Form.Label>Telefon Nömrəniz</Form.Label>
+            <Form.Control required pattern="[0-9]{9}" type="text" name="phoneNumber" placeholder="Telefon Nömrəniz"
+              value={formState.phoneNumber} onChange={handleChange}/>
+            <Form.Control.Feedback type="invalid">
+              Zəhmət olmasa etibarlı 9 rəqəmli telefon nömrəsi göstərin.
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Col>
+      </Row>
+      <Row className="mb-3">
         <Form.Group as={Col} controlId="formGridStreet">
           <Form.Label>Əv ünvanınız</Form.Label>
           <Form.Control type="text" name="street" placeholder="Əv ünvanınız"
             value={formState.street} onChange={handleChange}/>
         </Form.Group>
-      </Row>
-      <Row className="mb-3">
-        <Col xs={4}>
-          <Form.Group as={Col} controlId="formGridStreetNumber">
-            <Form.Label>Küçə nömrəniz</Form.Label>
-            <Form.Control type="text" name="streetNumber" placeholder="Küçə nömrəniz"
-              value={formState.streetNumber} onChange={handleChange}/>
-          </Form.Group>
-        </Col>
       </Row>
       <Row className="mb-3">
         <Col xs={4}>
@@ -162,18 +164,6 @@ function RegistrationForm({firebase}) {
             <Form.Label>ölkə</Form.Label>
             <Form.Control type="text" name="country" placeholder="ölkə"
               value={formState.country} onChange={handleChange}/>
-          </Form.Group>
-        </Col>
-      </Row>
-      <Row className="mb-3">
-        <Col xs={4}>
-          <Form.Group as={Col} controlId="formGridPhoneNumber">
-            <Form.Label>Telefon Nömrəniz</Form.Label>
-            <Form.Control required pattern="[0-9]{9}" type="text" name="phoneNumber" placeholder="Telefon Nömrəniz"
-              value={formState.phoneNumber} onChange={handleChange}/>
-            <Form.Control.Feedback type="invalid">
-              Zəhmət olmasa etibarlı 9 rəqəmli telefon nömrəsi göstərin.
-            </Form.Control.Feedback>
           </Form.Group>
         </Col>
       </Row>

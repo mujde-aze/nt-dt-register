@@ -1,9 +1,10 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.css";
 
 body {
-    background-image: url("images/background.jpeg");
+    background: transparent;
+    /*background-image: url("images/background.jpeg");
     color: white;
-    font-weight: bold;
+    font-weight: bold;*/
 }
 
 .row {

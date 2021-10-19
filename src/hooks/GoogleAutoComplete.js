@@ -30,18 +30,12 @@ function useGoogleAutoComplete(provinceElement) {
         return "";
       };
 
-      const provinceData = getProvinceData(getAddressComp("administrative_area_level_2"),
-          getAddressComp("locality"), getAddressComp("sublocality_level_1"));
-
-      /**
-       * Setting province value in this way avoids doubling-up on google places API
-       * requests.
-       * */
-      provinceElement.current.value = provinceData.province;
+      const province = getProvinceData(getAddressComp("administrative_area_level_2"),
+          getAddressComp("locality"));
+      provinceElement.current.value = province;
 
       setPlaceItems({
-        province: provinceData.province,
-        cityVillage: provinceData.cityVillage,
+        province: province,
         country: getAddressComp("country"),
       });
     }
@@ -50,20 +44,8 @@ function useGoogleAutoComplete(provinceElement) {
   return placeItems;
 }
 
-function getProvinceData(adminArea2, locality, subLocality) {
-  const province = adminArea2 !== "" ? adminArea2 : locality;
-  const cityVillage = () => {
-    if (province !== locality) {
-      return locality;
-    } else {
-      return subLocality;
-    }
-  };
-
-  return {
-    province: province,
-    cityVillage: cityVillage(),
-  };
+function getProvinceData(adminArea2, locality) {
+  return adminArea2 !== "" ? adminArea2 : locality;
 }
 
 export default useGoogleAutoComplete;

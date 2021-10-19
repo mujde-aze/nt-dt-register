@@ -23,7 +23,6 @@ function RegistrationForm({firebase}) {
     age: "",
     street: "",
     province: "",
-    cityVillage: "",
     country: "",
     ageConfirmation: "",
     source: retrieveSocialNetworkSource(document.referrer),
@@ -142,19 +141,12 @@ function RegistrationForm({firebase}) {
       <Row className="mb-3">
         <Col xs={4}>
           <Form.Group as={Col} controlId="locality">
-            <Form.Label>Hansı şəhərdə/rayonda yaşayırsız</Form.Label>
+            <Form.Label>Hansı rayon/şəhər/kənd&apos;də qalırsınız? Əgər Bakı qalırsanız xahiş edirik rayon adı yazın</Form.Label>
             <Form.Control required ref={provinceElement} type="text" name="province"
               onChange={handleChange}/>
             <Form.Control.Feedback type="invalid">
               Zəhmət olmasa etibarlı bir əyalət göstərin.
             </Form.Control.Feedback>
-          </Form.Group>
-        </Col>
-        <Col xs={4}>
-          <Form.Group as={Col} controlId="sublocality_level_1">
-            <Form.Label>Bakıda qalırsanız xahiş edirik rayon adı yazın</Form.Label>
-            <Form.Control type="text" name="cityVillage"
-              value={formState.cityVillage} onChange={handleChange}/>
           </Form.Group>
         </Col>
       </Row>

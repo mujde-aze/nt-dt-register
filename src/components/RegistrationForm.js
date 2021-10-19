@@ -132,13 +132,6 @@ function RegistrationForm({firebase}) {
         </Col>
       </Row>
       <Row className="mb-3">
-        <Form.Group as={Col} controlId="formGridStreet">
-          <Form.Label>Əv ünvanınız</Form.Label>
-          <Form.Control type="text" name="street" placeholder="Əv ünvanınız"
-            value={formState.street} onChange={handleChange}/>
-        </Form.Group>
-      </Row>
-      <Row className="mb-3">
         <Col xs={4}>
           <Form.Group as={Col} controlId="locality">
             <Form.Label>Hansı rayon/şəhər/kənd&apos;də qalırsınız? Əgər Bakı qalırsanız xahiş edirik rayon adı yazın</Form.Label>
@@ -158,6 +151,13 @@ function RegistrationForm({firebase}) {
               value={formState.country} onChange={handleChange}/>
           </Form.Group>
         </Col>
+      </Row>
+      <Row className="mb-3">
+        <Form.Group as={Col} controlId="formGridStreet">
+          <Form.Label>Ünvanınız</Form.Label>
+          <Form.Control type="text" name="street" placeholder="Əv ünvanınız"
+            value={formState.street} onChange={handleChange}/>
+        </Form.Group>
       </Row>
       <Row className="mb-3">
         <Form.Group className="mb-3" id="formGridAgeConfirmation">

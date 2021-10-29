@@ -129,6 +129,9 @@ function RegistrationForm({firebase}) {
               <option></option>
               <option>+994</option>
             </Form.Select>
+            <Form.Control.Feedback type="invalid">
+              Zəhmət olmasa ölkə kodu seçin.
+            </Form.Control.Feedback>
           </Form.Group>
         </Col>
         <Col xs={4}>

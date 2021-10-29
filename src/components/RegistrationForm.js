@@ -25,6 +25,7 @@ function RegistrationForm({firebase}) {
     province: "",
     country: "",
     ageConfirmation: "",
+    countryCode: "",
     source: retrieveSocialNetworkSource(document.referrer),
   });
 
@@ -49,6 +50,7 @@ function RegistrationForm({firebase}) {
       setShowSubmitSpinner(false);
       return;
     }
+
     const functions = getFunctions(firebase, "australia-southeast1");
     if (process.env.REACT_APP_DEV_MODE) {
       connectFunctionsEmulator(functions, "localhost", 5001);
@@ -120,6 +122,15 @@ function RegistrationForm({firebase}) {
         </Col>
       </Row>
       <Row className="mb-3">
+        <Col xs={1}>
+          <Form.Group as={Col} controlId="formGridCountryCode">
+            <Form.Label>Ölkə Kodu</Form.Label>
+            <Form.Select required name="countryCode" value={formState.countryCode} onChange={handleChange}>
+              <option></option>
+              <option>+994</option>
+            </Form.Select>
+          </Form.Group>
+        </Col>
         <Col xs={4}>
           <Form.Group as={Col} controlId="formGridPhoneNumber">
             <Form.Label>Telefon Nömrəniz</Form.Label>

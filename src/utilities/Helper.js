@@ -52,3 +52,35 @@ export function reformatPhoneNumber(countryCode, currentPhoneNumber) {
     maxDigitsReached: maxDigitsReached,
   };
 }
+
+export function getCountryCodeConstraints(countryCode) {
+  let countryCodeConstraint;
+  switch (countryCode) {
+    case "+994":
+      countryCodeConstraint = {
+        pattern: "^[0-9]{2}-[0-9]{3}-[0-9]{4}$",
+        message: "Telefon nömrəsi aşağıdakı formatda olmalıdır: XX-XXX-XXXX",
+      };
+      break;
+    case "+995":
+      countryCodeConstraint = {
+        pattern: "^[0-9]{3}-[0-9]{3}-[0-9]{3}$",
+        message: "ტელეფონის ნომერს უნდა ჰქონდეს შემდეგი ფორმატი: XXX-XXX-XXX",
+      };
+      break;
+    case "+90":
+      countryCodeConstraint = {
+        pattern: "^[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}$",
+        message: "Telefon numarası aşağıdaki biçimde olmalıdır: XXX-XXX-XX-XX",
+      };
+      break;
+    default:
+      countryCodeConstraint = {
+        pattern: "",
+        message: "Unidentified country code. Please report to admin.",
+      };
+      break;
+  }
+
+  return countryCodeConstraint;
+}

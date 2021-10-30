@@ -5,7 +5,7 @@ import {connectFunctionsEmulator, getFunctions, httpsCallable} from "firebase/fu
 import PropTypes from "prop-types";
 import useGoogleTagManager from "../hooks/GoogleTagManager";
 import {useHistory} from "react-router-dom";
-import {reformatPhoneNumber, retrieveSocialNetworkSource} from "../utilities/Helper";
+import {getCountryCodeConstraints, reformatPhoneNumber, retrieveSocialNetworkSource} from "../utilities/Helper";
 
 function RegistrationForm({firebase}) {
   useGoogleTagManager();
@@ -17,6 +17,10 @@ function RegistrationForm({firebase}) {
   const [validated, setValidated] = useState(false);
   const [showSubmitSpinner, setShowSubmitSpinner] = useState(false);
   const [phoneNumberReadOnly, setPhoneNumberReadOnly] = useState(true);
+  const [phoneNumberValidation, setPhoneNumberValidation] = useState({
+    pattern: "",
+    message: "",
+  });
   const [formState, setFormState] = useState({
     givenName: "",
     surname: "",
@@ -53,11 +57,14 @@ function RegistrationForm({firebase}) {
 
   function handleChange(event) {
     if (event.target.name === "countryCode") {
-      if (event.target.value !== "") {
+      const countryCodeValue = event.target.value;
+      if (countryCodeValue !== "") {
         setPhoneNumberReadOnly(false);
       } else {
         setPhoneNumberReadOnly(true);
       }
+
+      setPhoneNumberValidation(getCountryCodeConstraints(countryCodeValue));
     }
 
     if (event.target.name === "ageConfirmation") {
@@ -70,6 +77,7 @@ function RegistrationForm({firebase}) {
   async function handleSubmit(token) {
     setValidated(true);
     setShowSubmitSpinner(true);
+
     if (form.current.checkValidity() === false) {
       setShowSubmitSpinner(false);
       return;
@@ -161,12 +169,12 @@ function RegistrationForm({firebase}) {
         <Col xs={4}>
           <Form.Group as={Col} controlId="formGridPhoneNumber">
             <Form.Label>Telefon Nömrəniz</Form.Label>
-            <Form.Control required pattern="[0-9]{9}" type="text" name="phoneNumber"
+            <Form.Control required pattern={phoneNumberValidation.pattern} type="text" name="phoneNumber"
               placeholder="Telefon Nömrəniz"
               value={formState.phoneNumber} onKeyDown={handlePhoneNumberChange} readOnly={phoneNumberReadOnly}
               onChange={handleChange}/>
             <Form.Control.Feedback type="invalid">
-                            Zəhmət olmasa etibarlı 9 rəqəmli telefon nömrəsi göstərin.
+              {phoneNumberValidation.message}
             </Form.Control.Feedback>
           </Form.Group>
         </Col>

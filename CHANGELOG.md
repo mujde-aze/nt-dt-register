@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.0] - 2021-10-30
+
+### Added
+- Phone number pattern helper. Field automatically adds hyphens based on the pattern of the selected country code.
+- Regex and validation message changes based on the selected country code.
+
 ## [0.8.6] - 2021-10-29
 
 ### Added

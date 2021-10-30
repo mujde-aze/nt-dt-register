@@ -5,7 +5,7 @@ import {connectFunctionsEmulator, getFunctions, httpsCallable} from "firebase/fu
 import PropTypes from "prop-types";
 import useGoogleTagManager from "../hooks/GoogleTagManager";
 import {useHistory} from "react-router-dom";
-import {retrieveSocialNetworkSource} from "../utilities/Helper";
+import {reformatPhoneNumber, retrieveSocialNetworkSource} from "../utilities/Helper";
 
 function RegistrationForm({firebase}) {
   useGoogleTagManager();
@@ -36,44 +36,18 @@ function RegistrationForm({firebase}) {
   }, [placeItems]);
 
   function handlePhoneNumberChange(event) {
-    let formattedNumber = event.target.value;
-    let maxDigitsReached = false;
+    let reformattedNumber = {
+      phoneNumber: event.target.value,
+      maxDigitsReached: false,
+    };
     if (event.key !== "Backspace") {
-      const phoneNumberDigits = formattedNumber.replace(/(\D|\s+)/g, "").length;
-      switch (formState.countryCode) {
-        case "+994":
-          if (phoneNumberDigits === 2 || phoneNumberDigits === 5) {
-            formattedNumber = `${formattedNumber}-`;
-          }
-          if (phoneNumberDigits === 9) {
-            maxDigitsReached = true;
-          }
-          break;
-        case "+995":
-          if (phoneNumberDigits === 3 || phoneNumberDigits === 6) {
-            formattedNumber = `${formattedNumber}-`;
-          }
-          if (phoneNumberDigits === 9) {
-            maxDigitsReached = true;
-          }
-          break;
-        case "+90":
-          if (phoneNumberDigits === 3 || phoneNumberDigits === 6 || phoneNumberDigits === 8) {
-            formattedNumber = `${formattedNumber}-`;
-          }
-          if (phoneNumberDigits === 10) {
-            maxDigitsReached = true;
-          }
-          break;
-        default:
-          break;
-      }
+      reformattedNumber = reformatPhoneNumber(formState.countryCode, event.target.value);
     }
-    if (maxDigitsReached === true) {
+    if (reformattedNumber.maxDigitsReached === true) {
       event.preventDefault();
     }
 
-    setFormState((prevState) => ({...prevState, [event.target.name]: formattedNumber}));
+    setFormState((prevState) => ({...prevState, [event.target.name]: reformattedNumber.phoneNumber}));
   }
 
   function handleChange(event) {
@@ -180,7 +154,8 @@ function RegistrationForm({firebase}) {
             <Form.Label>Telefon Nömrəniz</Form.Label>
             <Form.Control required pattern="[0-9]{9}" type="text" name="phoneNumber"
               placeholder="Telefon Nömrəniz"
-              value={formState.phoneNumber} onKeyDown={handlePhoneNumberChange} onChange={handleChange}/>
+              value={formState.phoneNumber} onKeyDown={handlePhoneNumberChange}
+              onChange={handleChange}/>
             <Form.Control.Feedback type="invalid">
                             Zəhmət olmasa etibarlı 9 rəqəmli telefon nömrəsi göstərin.
             </Form.Control.Feedback>

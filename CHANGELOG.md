@@ -132,6 +132,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Google places Autocomplete integration
 
+[0.9.0]: https://github.com/mujde-aze/nt-dt-register/compare/v0.8.6...v0.9.0
 [0.8.6]: https://github.com/mujde-aze/nt-dt-register/compare/v0.8.5...v0.8.6
 [0.8.5]: https://github.com/mujde-aze/nt-dt-register/compare/v0.8.4...v0.8.5
 [0.8.4]: https://github.com/mujde-aze/nt-dt-register/compare/v0.8.3...v0.8.4

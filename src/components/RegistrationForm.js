@@ -154,7 +154,7 @@ function RegistrationForm({firebase}) {
         </Col>
       </Row>
       <Row className="mb-3">
-        <Col xs={1}>
+        <Col xs={2}>
           <Form.Group as={Col} controlId="formGridCountryCode">
             <Form.Label>Ölkə Kodu</Form.Label>
             <Form.Select required name="countryCode" value={formState.countryCode} onChange={handleChange}>

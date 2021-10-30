@@ -35,6 +35,19 @@ function RegistrationForm({firebase}) {
     }
   }, [placeItems]);
 
+  function handlePhoneNumberDelete(event) {
+    if (event.key !== "Backspace") {
+      let formattedNumber = event.target.value;
+      const phoneNumberDigits = formattedNumber.replace(/(\D|\s+)/g, "").length;
+
+      if (phoneNumberDigits === 2 || phoneNumberDigits === 5) {
+        formattedNumber = `${formattedNumber}-`;
+      }
+
+      setFormState((prevState) => ({...prevState, [event.target.name]: formattedNumber}));
+    }
+  }
+
   function handleChange(event) {
     if (event.target.name === "ageConfirmation") {
       setFormState((prevState) => ({...prevState, [event.target.name]: event.target.checked}));
@@ -81,7 +94,7 @@ function RegistrationForm({firebase}) {
       aria-hidden="true"
     />;
   } else {
-    spinner = <span />;
+    spinner = <span/>;
   }
 
   return (
@@ -92,7 +105,7 @@ function RegistrationForm({firebase}) {
           <Form.Control required type="text" name="givenName" placeholder="Ad"
             value={formState.givenName} onChange={handleChange}/>
           <Form.Control.Feedback type="invalid">
-            Zəhmət olmasa adınızı verin.
+                        Zəhmət olmasa adınızı verin.
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -116,7 +129,7 @@ function RegistrationForm({firebase}) {
               <option>60+</option>
             </Form.Select>
             <Form.Control.Feedback type="invalid">
-              Zəhmət olmasa yaş qrupunuzu seçin.
+                            Zəhmət olmasa yaş qrupunuzu seçin.
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
@@ -130,17 +143,18 @@ function RegistrationForm({firebase}) {
               <option>+994</option>
             </Form.Select>
             <Form.Control.Feedback type="invalid">
-              Zəhmət olmasa ölkə kodu seçin.
+                            Zəhmət olmasa ölkə kodu seçin.
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
         <Col xs={4}>
           <Form.Group as={Col} controlId="formGridPhoneNumber">
             <Form.Label>Telefon Nömrəniz</Form.Label>
-            <Form.Control required pattern="[0-9]{9}" type="text" name="phoneNumber" placeholder="Telefon Nömrəniz"
-              value={formState.phoneNumber} onChange={handleChange}/>
+            <Form.Control required pattern="[0-9]{9}" type="text" name="phoneNumber"
+              placeholder="Telefon Nömrəniz"
+              value={formState.phoneNumber} onKeyDown={handlePhoneNumberDelete} onChange={handleChange}/>
             <Form.Control.Feedback type="invalid">
-              Zəhmət olmasa etibarlı 9 rəqəmli telefon nömrəsi göstərin.
+                            Zəhmət olmasa etibarlı 9 rəqəmli telefon nömrəsi göstərin.
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
@@ -148,11 +162,12 @@ function RegistrationForm({firebase}) {
       <Row className="mb-3">
         <Col xs={4}>
           <Form.Group as={Col} controlId="locality">
-            <Form.Label>Hansı rayon/şəhər/kənd&apos;də qalırsınız? Əgər Bakı qalırsanız xahiş edirik rayon adı yazın</Form.Label>
+            <Form.Label>Hansı rayon/şəhər/kənd&apos;də qalırsınız? Əgər Bakı qalırsanız xahiş edirik rayon
+                            adı yazın</Form.Label>
             <Form.Control required ref={provinceElement} type="text" name="province"
               onChange={handleChange}/>
             <Form.Control.Feedback type="invalid">
-              Zəhmət olmasa etibarlı bir əyalət göstərin.
+                            Zəhmət olmasa etibarlı bir əyalət göstərin.
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
@@ -176,7 +191,8 @@ function RegistrationForm({firebase}) {
       <Row className="mb-3">
         <Form.Group className="mb-3" id="formGridAgeConfirmation">
           <Form.Check required type="checkbox" name="ageConfirmation" id="age-confirmation"
-            label="o Yaşım 18-dən yuxarıdır" value={formState.ageConfirmation} onChange={handleChange}
+            label="o Yaşım 18-dən yuxarıdır" value={formState.ageConfirmation}
+            onChange={handleChange}
             feedback="Təqdim etməzdən əvvəl 18 yaşdan yuxarı olduğunuzu təsdiq etməlisiniz"/>
         </Form.Group>
       </Row>

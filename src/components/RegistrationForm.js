@@ -35,17 +35,45 @@ function RegistrationForm({firebase}) {
     }
   }, [placeItems]);
 
-  function handlePhoneNumberDelete(event) {
+  function handlePhoneNumberChange(event) {
+    let formattedNumber = event.target.value;
+    let maxDigitsReached = false;
     if (event.key !== "Backspace") {
-      let formattedNumber = event.target.value;
       const phoneNumberDigits = formattedNumber.replace(/(\D|\s+)/g, "").length;
-
-      if (phoneNumberDigits === 2 || phoneNumberDigits === 5) {
-        formattedNumber = `${formattedNumber}-`;
+      switch (formState.countryCode) {
+        case "+994":
+          if (phoneNumberDigits === 2 || phoneNumberDigits === 5) {
+            formattedNumber = `${formattedNumber}-`;
+          }
+          if (phoneNumberDigits === 9) {
+            maxDigitsReached = true;
+          }
+          break;
+        case "+995":
+          if (phoneNumberDigits === 3 || phoneNumberDigits === 6) {
+            formattedNumber = `${formattedNumber}-`;
+          }
+          if (phoneNumberDigits === 9) {
+            maxDigitsReached = true;
+          }
+          break;
+        case "+90":
+          if (phoneNumberDigits === 3 || phoneNumberDigits === 6 || phoneNumberDigits === 8) {
+            formattedNumber = `${formattedNumber}-`;
+          }
+          if (phoneNumberDigits === 10) {
+            maxDigitsReached = true;
+          }
+          break;
+        default:
+          break;
       }
-
-      setFormState((prevState) => ({...prevState, [event.target.name]: formattedNumber}));
     }
+    if (maxDigitsReached === true) {
+      event.preventDefault();
+    }
+
+    setFormState((prevState) => ({...prevState, [event.target.name]: formattedNumber}));
   }
 
   function handleChange(event) {
@@ -152,7 +180,7 @@ function RegistrationForm({firebase}) {
             <Form.Label>Telefon Nömrəniz</Form.Label>
             <Form.Control required pattern="[0-9]{9}" type="text" name="phoneNumber"
               placeholder="Telefon Nömrəniz"
-              value={formState.phoneNumber} onKeyDown={handlePhoneNumberDelete} onChange={handleChange}/>
+              value={formState.phoneNumber} onKeyDown={handlePhoneNumberChange} onChange={handleChange}/>
             <Form.Control.Feedback type="invalid">
                             Zəhmət olmasa etibarlı 9 rəqəmli telefon nömrəsi göstərin.
             </Form.Control.Feedback>

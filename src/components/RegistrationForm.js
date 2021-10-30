@@ -16,6 +16,7 @@ function RegistrationForm({firebase}) {
 
   const [validated, setValidated] = useState(false);
   const [showSubmitSpinner, setShowSubmitSpinner] = useState(false);
+  const [phoneNumberReadOnly, setPhoneNumberReadOnly] = useState(true);
   const [formState, setFormState] = useState({
     givenName: "",
     surname: "",
@@ -51,6 +52,14 @@ function RegistrationForm({firebase}) {
   }
 
   function handleChange(event) {
+    if (event.target.name === "countryCode") {
+      if (event.target.value !== "") {
+        setPhoneNumberReadOnly(false);
+      } else {
+        setPhoneNumberReadOnly(true);
+      }
+    }
+
     if (event.target.name === "ageConfirmation") {
       setFormState((prevState) => ({...prevState, [event.target.name]: event.target.checked}));
     } else {
@@ -154,7 +163,7 @@ function RegistrationForm({firebase}) {
             <Form.Label>Telefon Nömrəniz</Form.Label>
             <Form.Control required pattern="[0-9]{9}" type="text" name="phoneNumber"
               placeholder="Telefon Nömrəniz"
-              value={formState.phoneNumber} onKeyDown={handlePhoneNumberChange}
+              value={formState.phoneNumber} onKeyDown={handlePhoneNumberChange} readOnly={phoneNumberReadOnly}
               onChange={handleChange}/>
             <Form.Control.Feedback type="invalid">
                             Zəhmət olmasa etibarlı 9 rəqəmli telefon nömrəsi göstərin.

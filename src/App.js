@@ -1,6 +1,6 @@
 import "./App.css";
 import {Col, Container, Row} from "react-bootstrap";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import RegistrationForm from "./components/RegistrationForm";
 import PropTypes from "prop-types";
 import {Wrapper} from "@googlemaps/react-wrapper";
@@ -15,7 +15,7 @@ function App({firebase}) {
       <Row>
         <Col>
           <BrowserRouter>
-            <Switch>
+            <Routes>
               <Route path="/success">
                 <SuccessView />
               </Route>
@@ -24,7 +24,7 @@ function App({firebase}) {
                   <RegistrationForm firebase={firebase} />
                 </Wrapper>
               </Route>
-            </Switch>
+            </Routes>
           </BrowserRouter>
         </Col>
       </Row>

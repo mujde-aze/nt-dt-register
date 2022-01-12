@@ -4,7 +4,7 @@ import useGoogleAutoComplete from "../hooks/GoogleAutoComplete";
 import {connectFunctionsEmulator, getFunctions, httpsCallable} from "firebase/functions";
 import PropTypes from "prop-types";
 import useGoogleTagManager from "../hooks/GoogleTagManager";
-import {useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {getCountryCodeConstraints, reformatPhoneNumber, retrieveSocialNetworkSource} from "../utilities/Helper";
 
 function RegistrationForm({firebase}) {
@@ -12,7 +12,7 @@ function RegistrationForm({firebase}) {
   const provinceElement = useRef();
   const form = useRef();
   const placeItems = useGoogleAutoComplete(provinceElement);
-  const history = useHistory();
+  const history = useNavigate();
 
   const [validated, setValidated] = useState(false);
   const [showSubmitSpinner, setShowSubmitSpinner] = useState(false);

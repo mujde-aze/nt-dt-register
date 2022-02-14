@@ -3,7 +3,7 @@
   "version": "0.9.5",
   "private": true,
   "dependencies": {
-    "@googlemaps/react-wrapper": "^1.1.21",
+    "@googlemaps/react-wrapper": "^1.1.23",
     "bootstrap": "^5.1.3",
     "firebase": "^9.6.4",
     "prop-types": "^15.8.0",
